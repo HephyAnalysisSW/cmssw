@@ -1,5 +1,14 @@
 import FWCore.ParameterSet.Config as cms
 
+import FWCore.ParameterSet.VarParsing as VarParsing
+options = VarParsing.VarParsing ('standard')
+options.maxEvents=-1 
+options.files = [ 'root://cms-xrd-global.cern.ch//store/data/Run2017H/FSQJet1/MINIAOD/17Nov2017-v1/70000/E0A4F930-6E4D-E811-8EB8-90E2BACBAA90.root' ] 
+options.register ('outfile','ctpps.root',
+          VarParsing.VarParsing.multiplicity.singleton,
+          VarParsing.VarParsing.varType.string,
+          "outfile")
+
 from Configuration.StandardSequences.Eras import eras
 process = cms.Process('CTPPSFastSimulation', eras.ctpps_2016)
 
@@ -17,34 +26,10 @@ process.MessageLogger = cms.Service("MessageLogger",
 process.source = cms.Source('PoolSource',
                             noEventSort = cms.untracked.bool(True),                                        # add this                                                                       
                             duplicateCheckMode = cms.untracked.string('noDuplicateCheck'), # and this    
-                            fileNames = cms.untracked.vstring(
-#    "root://cms-xrd-global.cern.ch//store/relval/CMSSW_9_4_9/RelValTTbar_13/GEN-SIM/94X_mc2017_realistic_v14-v1/10000/DA3D9F2E-91E9-E811-8E7A-0CC47A4D767A.root",
-"root://cms-xrd-global.cern.ch//store/data/Run2017H/FSQJet1/MINIAOD/17Nov2017-v1/70000/E0A4F930-6E4D-E811-8EB8-90E2BACBAA90.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_1.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_2.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_3.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_4.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_5.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_6.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_7.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_8.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_9.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_10.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_11.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_12.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_13.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_14.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_15.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_16.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_17.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_18.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_19.root",
-#    "file:/hadoop/cms/store/user/rebassoo/2018_12_17_SignalFiles2017Data/GEN-SIM/step0_fpmc_exclww_a0W2point5e-6_alldecays_xi1to30pct_20.root"
-    )
-)
+                            fileNames = cms.untracked.vstring( options.files ) )
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1000000)
+    input = cms.untracked.int32(options.maxEvents)
 )
 
 # particle-data table
@@ -130,7 +115,7 @@ process.ctppsLocalTrackLiteProducer.includeDiamonds = False
 
 
 process.out = cms.OutputModule('PoolOutputModule',
-    fileName = cms.untracked.string('ctppsSim.root'),
+    fileName = cms.untracked.string(options.outfile),
     outputCommands = cms.untracked.vstring([ 'drop *', 'keep *_*_*_CTPPSFastSimulation' ]) 
 )
 
