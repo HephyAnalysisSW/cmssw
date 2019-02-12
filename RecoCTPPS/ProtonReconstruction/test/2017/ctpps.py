@@ -26,6 +26,8 @@ for k, v in edmCollections.iteritems():
 
 nevents = 1 if small else events.size()
 
+reco_protons = []
+
 for i in range(nevents):
     events.to(i)
 
