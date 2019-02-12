@@ -1,0 +1,12 @@
+https://hypernews.cern.ch/HyperNews/CMS/get/physics-validation/2983.html
+Cert_306896-307082_13TeV_PromptReco_Collisions17_JSON_LowPU.txt
+/FSQJet1/Run2017H-17Nov2017-v1/MINIAOD
+/FSQJet2/Run2017H-17Nov2017-v1/MINIAOD
+
+FSQJet1 = cms.vstring( 'HLT_DiPFJet15_NoCaloMatched_v13',
+    'HLT_DiPFJet25_NoCaloMatched_v13' ),
+FSQJet2 = cms.vstring( 'HLT_DiPFJet15_FBEta3_NoCaloMatched_v14',
+'HLT_DiPFJet25_FBEta3_NoCaloMatched_v14',
+'HLT_DiPFJetAve15_HFJEC_v14',
+'HLT_DiPFJetAve25_HFJEC_v14',
+'HLT_DiPFJetAve35_HFJEC_v14' ),
