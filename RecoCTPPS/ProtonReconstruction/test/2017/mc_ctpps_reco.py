@@ -1,13 +1,18 @@
 import FWCore.ParameterSet.Config as cms
 
 import FWCore.ParameterSet.VarParsing as VarParsing
+options = VarParsing.VarParsing ('standard')
+options.maxEvents=-1 
+options.files = [ 'root://cms-xrd-global.cern.ch//store/data/Run2017H/FSQJet1/MINIAOD/17Nov2017-v1/70000/E0A4F930-6E4D-E811-8EB8-90E2BACBAA90.root' ] 
+options.register ('outfile','ctpps.root',
+          VarParsing.VarParsing.multiplicity.singleton,
+          VarParsing.VarParsing.varType.string,
+          "outfile")
 
-options = VarParsing.VarParsing ('analysis')
-options.register('outfile',  '', VarParsing.VarParsing.multiplicity.singleton, VarParsing.VarParsing.varType.string, '') 
-
-options.parseArguments()
-
-print "Writing CTPPS EDM output to", options.outfile
+if not 'ipython' in VarParsing.sys.argv[0]:
+  options.parseArguments()
+else:
+  print "No parsing of arguments!"
 
 from Configuration.StandardSequences.Eras import eras
 process = cms.Process('CTPPSFastSimulation', eras.ctpps_2016)
@@ -26,7 +31,7 @@ process.MessageLogger = cms.Service("MessageLogger",
 process.source = cms.Source('PoolSource',
                             noEventSort = cms.untracked.bool(True),                                        # add this                                                                       
                             duplicateCheckMode = cms.untracked.string('noDuplicateCheck'), # and this    
-                            fileNames = cms.untracked.vstring( options.inputFiles ) )
+                            fileNames = cms.untracked.vstring( options.files ) )
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
@@ -147,8 +152,8 @@ process.simulation_step = cms.Path(
 process.outpath = cms.EndPath(process.out)
 
 process.schedule = cms.Schedule(
-#    process.p,
-#    process.simulation_step,
+    process.p,
+    process.simulation_step,
     process.reco_step,
     process.outpath
 )
